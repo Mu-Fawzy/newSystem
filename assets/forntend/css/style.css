@@ -1,0 +1,147 @@
+@import "http://fonts.googleapis.com/earlyaccess/droidarabickufi.css";
+body {
+    direction:rtl;
+	font-family: 'Droid Arabic Kufi',Tahoma;
+}
+header {
+    position: relative;
+}
+header .header_top {
+    background: #fff;
+    line-height: 45px;
+    height: 45px;
+    overflow: hidden;
+}
+.social-media {
+    float: left;
+    margin-left: 10px;
+}
+.social-media a {
+    color: #337ab7;
+    font-size: 15px;
+    margin: 0 5px;
+}
+.userlogin {
+    margin-bottom: 0;
+    display: inline-block;
+}
+
+.logout_button {
+    color: #337ab7;
+}
+.header_bottom {
+    padding: 0;
+    z-index: 1;
+    margin-top: 15px;
+}
+.right.logo {
+	text-align:center;
+}
+.right img {
+    width: 100%;
+}
+
+footer .right img {
+    padding-bottom: 15px;
+    margin: 0 auto;
+}
+.padding-top {
+    padding: 15px 0;
+}
+a:hover {
+    text-decoration:none;
+}
+.table-bordered>thead>tr>th select{
+	
+margin-top: 10px;
+	
+width: 100%;
+}
+.table-bordered>thead>tr>th, .table-bordered>thead>tr>td {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 12px;
+	border-bottom-width: 1px;
+}
+table.table td {
+	display: table-cell;
+	vertical-align: middle !important;
+	text-align: center;
+	font-size: 12px;
+}
+table.dataTable tbody tr:hover {
+   background-color: #e5e6e6;
+-webkit-box-shadow: 0 6px 6px -6px #0E1119;
+	   -moz-box-shadow: 0 6px 6px -6px #0E1119;
+			box-shadow: 0 6px 6px -6px #0E1119;
+}
+table.table td:hover {
+	background-color: #e70b0c;
+	color: #fff;
+	box-shadow: #000000 -1px 1px, #000000 -2px 2px, #000000 -3px 3px, #000000 -4px 4px, #000000 -5px 5px, #000000 -6px 6px;
+	transform: translate3d(6px, -6px, 0);
+	transition-delay: 0s;
+	transition-duration: 0.4s;
+	transition-property: all;
+	transition-timing-function: line;
+}
+.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+    display: table-cell;
+    vertical-align: middle;
+}
+table.table td a,
+table.table td span {
+	color: #337ab7;
+	font-weight: bold;
+	cursor: pointer;
+	margin: 5px 0;
+}
+table.dataTable tbody tr.selected td a,
+table.dataTable tbody tr.selected td span {
+    color: #FFF;
+}
+
+table.table td:hover a,
+table.table td:hover span {
+    color: #FFF;
+}
+.table-heading {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	background: #00d083c7;
+	padding: 5px 0;
+	border-radius: 10px;
+}
+.table-heading h1 {
+	font-size: 16px;
+	font-weight: bold;
+	border-bottom: 1px solid white;
+	padding-bottom: 10px;
+	margin: 0;
+	display: inline-block;
+	color: #FFF;
+}
+.invoice_info p {
+	font-size: 13px;
+}
+.invoice_info p span{
+	color: #ea0a0e;
+	display: inline-block;
+	font-weight: bold;
+}
+.info_footer {
+	padding-bottom: 50px;
+}
+.info_footer p span {
+    color: #000;
+}
+.green_color {
+	background: #38da9e;
+	color: #FFF;
+	font-weight: bold;
+}
+.note {
+	color:red;
+	font-weight: bold;
+}

@@ -1,0 +1,26 @@
+.rwmb-file_advanced-wrapper {
+}
+.rwmb-file_advanced-wrapper .rwmb-media-preview {
+    float: right;
+}
+.rwmb-file_advanced-wrapper .rwmb-media-info {
+    margin-right: 65px;
+    margin-left: 0;
+}
+.rwmb-edit-media, .rwmb-remove-media {
+    display: inline-block;
+    margin-left: 5px;
+}
+.rwmb-edit-media .dashicons, .rwmb-remove-media .dashicons {
+	margin-left: 2px;
+}
+.rwmb-file_advanced-wrapper .rwmb-media-content img {
+	-webkit-transform: translate(50%, 50%);
+	-ms-transform: translate(50%, 50%);
+	transform: translate(50%, 50%);
+}
+.rwmb-file_advanced-wrapper .rwmb-media-content .centered {
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}

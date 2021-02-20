@@ -1,0 +1,62 @@
+@media(max-width:1200px){
+	.table-responsive {
+		width: 100%;
+		overflow-x: scroll;
+		overflow-y: hidden;
+		border: 1px solid #ddd;
+		-ms-overflow-style: -ms-autohiding-scrollbar;
+		-webkit-overflow-scrolling: touch;
+	}
+}
+@media(max-width:991px) {
+	.logo  {float: none !important; text-align:center;}
+}
+@media(max-width:630px) {
+	header .header_top .right {
+		width: 100%;
+		text-align: center;
+		float: none;
+	}
+	header .header_top {
+		height: inherit;
+	}
+}
+
+@media (max-width:350px){
+	.header_top .social-media {
+		width: 100%;
+		margin-left: 0;
+	}
+}
+@media print {
+    .dataTables_length,#datatable1_filter,.dataTables_info,.dataTables_paginate,a.more,header .header_top{
+		display:none;
+	}
+	.col-md-3,.col-md-9,.col-md-6 {
+		float:right;
+	}
+	.table-responsive {
+		overflow:hidden !important;
+		border:0
+	}
+	.col-md-3 {
+		width: 25%;
+	}
+	.col-md-6 {
+		width: 50%;
+	}
+	.col-md-9 {
+		width: 75%;
+	}
+	.invoice_info p span {
+		color: #ea0a0e !important;
+		display: inline-block;
+		font-weight: bold;
+	}
+	.table-heading {
+		background: #00d083c7 !important;
+	}
+	.table-heading h1 {
+		color: #FFF !important;
+	}
+}
