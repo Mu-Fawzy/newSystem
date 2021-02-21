@@ -47,7 +47,7 @@
 											@forelse ($years as $item)
 												<a class="dropdown-item" href="{{ route('subcontractors.index',['year'=>$item->year]) }}">{{ $item->year }}</a>
 											@empty
-												<a class="dropdown-item" href="#">{{ __('content.no items yet', ['model'=>trans_choice('content.subcontractor',1)]) }}</a>	
+												<a class="dropdown-item" href="#">{{ __('content.no items yet', ['model'=>removeLettersFromStart(trans_choice('content.subcontractor',1)  ,2 ,null)]) }}</a>
 											@endforelse
 												
 										</div>
@@ -150,7 +150,7 @@
 												</tr>
 											@empty
 												<tr>
-													<th class="text-center" colspan="8">{{ __('content.no items yet', ['model'=>trans_choice('content.subcontractor',1)]) }}</th>
+													<th class="text-center" colspan="8">{{ __('content.no items yet', ['model'=>removeLettersFromStart(trans_choice('content.subcontractor',1)  ,2 ,null)]) }}</th>
 												</tr>
 											@endforelse
 											
