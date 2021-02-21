@@ -66,7 +66,17 @@
 						<div class="card">
 							<div class="card-header pb-0">
 								<div class="d-flex justify-content-between">
-									<h4 class="card-title mb-2">{{ __('content.table',['model'=>trans_choice('content.subcontractor',2)]) }}</h4>
+									<h4 class="card-title mb-2">
+										@if (isset(request()->search))
+											@if ($subcontractors->total() > 0)
+												<b>{!! __('content.there are (n) results found for (s)', ['number'=>$subcontractors->total(),'search'=> "(".request()->search.")"]) !!}</b>
+											@else
+												<b>{{ __('content.sorry, no results found') }}</b>
+											@endif
+										@else
+											{{ __('content.table',['model'=>trans_choice('content.subcontractor',2)]) }}
+										@endif
+									</h4>
 									@isset($trash)
 										@if ($trash == true)
 											<a href="{{ route('subcontractors.index') }}" class="btn-info btn-icon"><i class="la la-arrow-left"></i></a>
@@ -150,7 +160,13 @@
 												</tr>
 											@empty
 												<tr>
-													<th class="text-center" colspan="8">{{ __('content.no items yet', ['model'=>removeLettersFromStart(trans_choice('content.subcontractor',2)  ,2 ,null)]) }}</th>
+													<th class="text-center" colspan="8">
+														@if (isset(request()->search) != null) 
+															{!! __('content.sorry no results found for', ['search'=> "<b>".request()->search."</b>."]) !!} 
+														@else
+														{{ __('content.no items yet', ['model'=>removeLettersFromStart(trans_choice('content.subcontractor',2)  ,2 ,null)]) }} <a href="{{ route('subcontractors.create') }}">{{  __('content.create now') }}</a>
+														@endif
+													</th>
 												</tr>
 											@endforelse
 											
