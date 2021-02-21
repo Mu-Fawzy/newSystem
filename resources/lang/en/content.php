@@ -75,6 +75,7 @@ return [
     'updated successfully'                  => ':name :attr Updated Successfully!',
     'deleted successfully'                  => ':name :attr Deleted Successfully!',
     'archived successfully'                 => ':name :attr Archived Successfully!',
+    'trashed successfully'                  => ':name :attr Trashed Successfully!',
     'restored successfully'                 => ':name :attr Restored Successfully!',
     'you are not authorized to see the content'=> 'You Are Not Authorized To See The Content',
 
@@ -129,4 +130,7 @@ return [
     'ooops, something wrong appended.'          => 'Ooops, Something Wrong Appended.',
     'the file size is too big.'                 => 'The file size is too big (:megaSize M max).',
     'number of'                                 => 'Number Of',
+
+    'file deleted successfully!'                => 'File Deleted Successfully!',
+
 ];

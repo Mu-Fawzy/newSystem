@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Models\Subcontractor;
 use App\Http\Requests\SubcontractorRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UploadFileRequest;
 use App\Models\Attachment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -204,7 +205,7 @@ class SubContractorController extends Controller
         return redirect()->back();
     }
 
-    public function updateAttachs(Request $request, SubContractor $subcontractor)
+    public function updateAttachs(UploadFileRequest $request, SubContractor $subcontractor)
     {
         if($request->hasFile('attachment_name')){
             foreach ($request->file('attachment_name') as $photo) {
@@ -264,12 +265,12 @@ class SubContractorController extends Controller
             $this_subcontractor->attachlogo()->delete();
 
             $this_subcontractor->forceDelete();
-            session()->flash('success', 'Subcontractor Deleted Successfully!');
+            session()->flash('success', __('content.deleted successfully',['attr'=> $this_subcontractor->name, 'name'=> trans_choice('content.subcontractor',1)]));
             return redirect()->route('subcontractors.trashed');
         }else{
             $this_subcontractor->delete();
 
-            session()->flash('success', 'Subcontractor Trashed Successfully!');
+            session()->flash('success', __('content.trashed successfully',['attr'=> $this_subcontractor->name, 'name'=> trans_choice('content.subcontractor',1)]));
             return redirect()->route('subcontractors.index');
         }
     }
@@ -282,7 +283,7 @@ class SubContractorController extends Controller
                 $attach->delete();
             }
         });
-        session()->flash('success', 'File Deleted Successfully!');
+        session()->flash('success', __('content.file deleted successfully!'));
         return redirect()->back();
     }
 
@@ -291,7 +292,7 @@ class SubContractorController extends Controller
         $this_subcontractor = Subcontractor::onlyTrashed()->findOrFail($id);
         $this_subcontractor->restore();
 
-        session()->flash('success', 'Subcontractor Restored Successfully!');
+        session()->flash('success', __('content.restored successfully',['attr'=> $this_subcontractor->name, 'name'=> trans_choice('content.subcontractor',1)]));
         return redirect()->route('subcontractors.index');
     }
 }

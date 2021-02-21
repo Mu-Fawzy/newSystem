@@ -75,6 +75,7 @@ return [
     'updated successfully'                  => 'تم تحديث :name ":attr" بنجاح!',
     'deleted successfully'                  => 'تم حذف :name ":attr" بنجاح!',
     'archived successfully'                 => 'تم ارشفة :name ":attr" بنجاح!',
+    'trashed successfully'                  => ':name تم وضعة قائمة المحذوفات ":attr" بنجاح!',
     'restored successfully'                 => 'تم استرجاع :name ":attr" بنجاح!',
     'you are not authorized to see the content'=> 'غير مصرح لك برؤية المحتوى',
 
@@ -129,4 +130,7 @@ return [
     'ooops, something wrong appended.'          => 'عفوًا ، تم رفع شيء خاطئ.',
     'the file size is too big.'                 => 'حجم الملف كبير جدًا (:megaSize ميغا كحد أقصى).',
     'number of'                                 => 'عدد',
+
+
+    'file deleted successfully!'                => 'تم حذف الملف بنجاح!',
 ];

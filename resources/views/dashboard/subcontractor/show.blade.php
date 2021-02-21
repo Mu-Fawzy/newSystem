@@ -40,17 +40,25 @@
 							<div class="card-body">
 								<div class="pl-0">
 									<div class="main-profile-overview">
-										@if ($subcontractor->attachlogo != null)
+										<div class="imagesubcontractor">
 											<div class="main-img-user profile-user">
-												<img class="img-thumbnail" src="{{URL::asset($subcontractor->attachlogo->setPath($subcontractor->attachlogo->name))}}">
-												<a class="modal-effect fas fa-camera profile-edit" data-effect="effect-scale" data-toggle="modal" href="#uploadLogo"></a>
+												@if ($subcontractor->attachlogo != null)
+													<img class="img-thumbnail" src="{{URL::asset($subcontractor->attachlogo->setPath($subcontractor->attachlogo->name))}}">
+													<a class="modal-effect fas fa-camera profile-edit" data-effect="effect-scale" data-toggle="modal" href="#uploadLogo"></a>
+												@else
+													<img class="img-thumbnail" src="{{URL::asset('assets/images/logo.png')}}">
+													<a class="modal-effect fas fa-camera profile-edit" data-effect="effect-scale" data-toggle="modal" href="#uploadLogo"></a>
+												@endif
 											</div>
-										@else
-											<div class="main-img-user profile-user">
-												<img class="img-thumbnail" src="{{URL::asset('assets/images/logo.png')}}">
-												<a class="modal-effect fas fa-camera profile-edit" data-effect="effect-scale" data-toggle="modal" href="#uploadLogo"></a>
-											</div>
-										@endif
+											@error('logo')
+												<div class="alert alert-danger mg-t-6 clearfix" role="alert">
+													<button aria-label="Close" class="close" data-dismiss="alert" type="button">
+														<span aria-hidden="true">&times;</span>
+													</button>
+													{{ $message }}
+												</div>
+											@enderror
+										</div>
 										<div class="d-flex justify-content-between mg-b-20">
 											<div>
 												<h5 class="main-profile-name">{{ $subcontractor->name }}</h5>
@@ -91,7 +99,7 @@
 											</div>
 											
 											<div class="m{{ Config::get('app.locale') == 'ar' ? 'r' : 'l' }}-auto">
-												<h5 class="tx-13">{{ __('content.work sites') }}</h5>
+												<h5 class="tx-13">{{ trans_choice('content.work site',2) }}</h5>
 												<h2 class="mb-0 tx-22 mb-1 mt-1">
 													<a href="{{ route('subcontractor.worksites', $subcontractor->id) }}">{{ $subcontractor->worksites->count() }}</a>
 												</h2>
@@ -109,7 +117,7 @@
 												<i class="icon-paypal text-danger"></i>
 											</div>
 											<div class="m{{ Config::get('app.locale') == 'ar' ? 'r' : 'l' }}-auto">
-												<h5 class="tx-13">{{ __('content.work items') }}</h5>
+												<h5 class="tx-13">{{ trans_choice('content.work item',2) }}</h5>
 												<h2 class="mb-0 tx-22 mb-1 mt-1">
 													<a href="{{ route('subcontractor.workitems',$subcontractor->id) }}">{{ $subcontractor->workitems->count() }}</a>
 												</h2>
@@ -185,7 +193,16 @@
 															<div class="form-group">
 																<label class="form-label">{{ __('content.upload attachments') }}</label>
 																<input type="file" name="attachment_name[]" class="dropify" data-height="200" multiple/>
-																
+																@foreach($errors->get('attachment_name.*') as $key=>$messages)
+																	@foreach($messages as $message)
+																		<div class="alert alert-danger mg-t-6" role="alert">
+																			<button aria-label="Close" class="close" data-dismiss="alert" type="button">
+																				<span aria-hidden="true">&times;</span>
+																			</button>
+																			{{ $message }} ({{ trans_choice('content.invoice',1) }} {{ substr($key, -1, strpos($key, ".")) }})
+																		</div>
+																	@endforeach
+																@endforeach
 															</div>
 														</div>
 													</div>
