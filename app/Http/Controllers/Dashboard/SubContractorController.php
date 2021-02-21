@@ -251,22 +251,24 @@ class SubContractorController extends Controller
     public function destroy($id)
     {
         $this_subcontractor = Subcontractor::withTrashed()->findOrFail($id);
-        if($this_subcontractor->trashed()){
-            //remove logo from database 
-            Storage::disk('public_upload')->delete('logos/'.$this_subcontractor->attachlogo->name);
-            $this_subcontractor->attachlogo()->delete();
-            //remove attachs from database 
-            $this_subcontractor->attachs->each(function($attach) {
-                Storage::disk('public_upload')->delete('attachs/'.$attach->name);
-                $attach->delete();
-            });
 
-            Storage::disk('public_upload')->delete('attachs/'.$this_subcontractor->attachlogo->name);
-            $this_subcontractor->attachlogo()->delete();
+        if($this_subcontractor->trashed()){
+            if (!empty($this_subcontractor->attachlogo->name)) {
+                //remove logo from database 
+                Storage::disk('public_upload')->delete('logos/'.$this_subcontractor->attachlogo->name);
+                $this_subcontractor->attachlogo()->delete();
+            }
+            if (!empty($this_subcontractor->attachs)) {
+                //remove attachs from database 
+                $this_subcontractor->attachs->each(function($attach) {
+                    Storage::disk('public_upload')->delete('attachs/'.$attach->name);
+                    $attach->delete();
+                });
+            }
 
             $this_subcontractor->forceDelete();
             session()->flash('success', __('content.deleted successfully',['attr'=> $this_subcontractor->name, 'name'=> trans_choice('content.subcontractor',1)]));
-            return redirect()->route('subcontractors.trashed');
+            return redirect()->route('subcontractors.index');
         }else{
             $this_subcontractor->delete();
 

@@ -22,7 +22,7 @@ class Attachment extends Model
         if($this->type == 'logo')
             return $val = 'uploads/logos/'.$val;
         else
-        return $val = 'uploads/attachs/'.$val;
+            return $val = 'uploads/attachs/'.$val;
     }
 
     public function remvoeExt($val)

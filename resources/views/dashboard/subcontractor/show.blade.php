@@ -43,7 +43,7 @@
 										<div class="imagesubcontractor">
 											<div class="main-img-user profile-user">
 												@if ($subcontractor->attachlogo != null)
-													<img class="img-thumbnail" src="{{URL::asset($subcontractor->attachlogo->setPath($subcontractor->attachlogo->name))}}">
+													<img class="img-thumbnail" src="{{URL::asset('public/'.$subcontractor->attachlogo->setPath($subcontractor->attachlogo->name))}}">
 													<a class="modal-effect fas fa-camera profile-edit" data-effect="effect-scale" data-toggle="modal" href="#uploadLogo"></a>
 												@else
 													<img class="img-thumbnail" src="{{URL::asset('assets/images/logo.png')}}">
