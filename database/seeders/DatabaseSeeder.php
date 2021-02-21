@@ -41,11 +41,11 @@ class DatabaseSeeder extends Seeder
         ]);
         $user->assignRole([$role->id]);
 
-        //\App\Models\User::factory(1)->create();
-        \App\Models\Worksite::factory(150)->create();
-        \App\Models\Workitem::factory(120)->create();
-        \App\Models\Subcontractor::factory(25)->create();
-        \App\Models\Contract::factory(1000)->create();
+        // \App\Models\User::factory(1)->create();
+        // \App\Models\Worksite::factory(150)->create();
+        // \App\Models\Workitem::factory(120)->create();
+        // \App\Models\Subcontractor::factory(25)->create();
+        // \App\Models\Contract::factory(1000)->create();
     }
 
     public function createRole(){
