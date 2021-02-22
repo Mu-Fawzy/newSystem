@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-class SubContractorRequest extends FormRequest
+class SubcontractorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -83,10 +83,10 @@ class SubContractorRequest extends FormRequest
             $arrayMessage['name_'.$localeCode.'.unique'] = __('validation.unique', ['attribute'=> __('content.subcontractor name').' '.$localeCode]);
         }
         $arrayMessage['status.boolean'] = __('validation.boolean', ['attribute'=> __('content.status')]);
-        $arrayMessage['attachment_name.array'] = __('validation.array',['attribute'=>trans_choice('content.attachment',2)]);
-        $arrayMessage['attachment_name.*.required'] = __('validation.required',['attribute'=>trans_choice('content.attachment',2)]);
-        $arrayMessage['attachment_name.*.mimes'] = __('validation.mimes',['attribute'=>trans_choice('content.attachment',2)]);
-        $arrayMessage['attachment_name.*.max'] = __('validation.max',['attribute'=>trans_choice('content.attachment',2)]);
+        $arrayMessage['attachment_name.array'] = __('validation.array',['attribute'=>__('content.attachments')]);
+        $arrayMessage['attachment_name.*.required'] = __('validation.required',['attribute'=>__('content.attachments')]);
+        $arrayMessage['attachment_name.*.mimes'] = __('validation.mimes',['attribute'=>__('content.attachments')]);
+        $arrayMessage['attachment_name.*.max'] = __('validation.max',['attribute'=>__('content.attachments')]);
         $arrayMessage['logo.image'] = __('validation.image',['attribute'=>__('content.subcontractor logo')]);
         $arrayMessage['logo.mimes'] = __('validation.mimes',['attribute'=>__('content.subcontractor logo')]);
         $arrayMessage['logo.max'] = __('validation.max',['attribute'=>__('content.subcontractor logo')]);

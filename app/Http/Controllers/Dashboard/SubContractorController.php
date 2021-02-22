@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Subcontractor;
-use App\Http\Requests\SubcontractorRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadFileRequest;
 use App\Models\Attachment;
@@ -11,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Http\Requests\SubcontractorRequest;
 
 class SubContractorController extends Controller
 {
@@ -110,7 +110,7 @@ class SubContractorController extends Controller
         return view('dashboard.subcontractor.create', compact('years'));
     }
 
-    public function store(SubContractorRequest $request)
+    public function store(SubcontractorRequest $request)
     {
         $data = [];
         foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
@@ -170,7 +170,7 @@ class SubContractorController extends Controller
         
     }
 
-    public function update(SubContractorRequest $request, SubContractor $subcontractor)
+    public function update(SubcontractorRequest $request, SubContractor $subcontractor)
     {
         $data = [];
         foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
