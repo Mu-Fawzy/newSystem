@@ -68,10 +68,7 @@ class WorkitemsController extends Controller
 
         $data['user_id'] = auth()->id();
 
-        $workitem = Workitem::create([
-            'name_ar' => $request->name_ar,
-            'name_en' => $request->name_en,
-        ]);
+        $workitem = Workitem::create($data);
 
         if($workitem){
             $request->session()->flash('success', __('content.created successfully',['attr'=>$workitem->name,'name'=>trans_choice('content.work item',1)]));
