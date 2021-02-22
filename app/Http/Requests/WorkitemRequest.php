@@ -48,8 +48,7 @@ class WorkitemRequest extends FormRequest
     public function translateRequest(){
         $arrayRequest = array();
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
-            $arrayRequest['name.'.$localeCode] = "unique:workitems,name->$localeCode";
-            //$arrayRequest['name.'.$localeCode] = "required|string|unique:workitems,name->$localeCode";
+            $arrayRequest['name.'.$localeCode] = "required|string|unique:workitems,name->$localeCode";
         }
         return $arrayRequest;
     }
