@@ -67,7 +67,7 @@ class WorkitemsController extends Controller
         }
 
         $data['user_id'] = auth()->id();
-        return $data;
+
         $workitem = Workitem::create($data);
 
         if($workitem){
