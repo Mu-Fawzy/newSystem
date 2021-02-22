@@ -72,13 +72,15 @@ class SubContractorController extends Controller
     public function getWorksites(Subcontractor $subcontractor)
     {
         $worksites = $subcontractor->worksites()->paginate(5);
-        return view('dashboard.worksites.worksites', compact('worksites'));
+        $subcontractorWorksites = $worksites->total();
+        return view('dashboard.worksites.worksites', compact('worksites','subcontractor','subcontractorWorksites'));
     }
 
     public function getWorkitems(Subcontractor $subcontractor)
     {
         $workitems = $subcontractor->workitems()->paginate(5);
-        return view('dashboard.worksitems.workitems', compact('workitems'));
+        $subcontractorWorkitems = $workitems->total();
+        return view('dashboard.worksitems.workitems', compact('workitems','subcontractor','subcontractorWorkitems'));
     }
 
     public function trashed()
@@ -219,7 +221,7 @@ class SubContractorController extends Controller
 
                 $subcontractor->attachs()->save($attachment);
             }
-            $request->session()->flash('success', 'Attachment Created Successfully!');
+            $request->session()->flash('success', __('content.updated successfully',['attr'=>trans_choice('content.attachment',2),'name'=>'']));
             return redirect()->back();
 
         }elseif($request->hasFile('logo')) {
@@ -242,7 +244,7 @@ class SubContractorController extends Controller
 
             $subcontractor->attachlogo()->save($attachment);
 
-            $request->session()->flash('success', 'Logo Updated Successfully!');
+            $request->session()->flash('success', __('content.updated successfully',['name'=>'', 'attr'=>__('content.logo')]));
             return redirect()->back();
         }
         return redirect()->back();

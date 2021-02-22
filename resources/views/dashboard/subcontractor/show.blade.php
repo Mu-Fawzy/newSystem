@@ -7,6 +7,8 @@
 <link href="{{URL::asset('assets/dashboard/assets/plugins/pickerjs/picker.min.css')}}" rel="stylesheet">
 <!---Internal Fileupload css-->
 <link href="{{URL::asset('assets/dashboard/assets/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
+<!--- Internal Sweet-Alert css-->
+<link href="{{URL::asset('assets/dashboard/assets/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
 @endsection
 @section('page-header')
 				<!-- breadcrumb -->
@@ -137,7 +139,7 @@
 											<a href="#home" data-toggle="tab" aria-expanded="true" class="active"> <span class="visible-xs"><i class="las la-user-circle tx-16 m{{ Config::get('app.locale') == 'ar' ? 'l' : 'r' }}-1"></i></span> <span class="hidden-xs">{{ __('content.about subcontractors') }}</span> </a>
 										</li>
 										<li>
-											<a href="#attachs" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="las la-images tx-15 m{{ Config::get('app.locale') == 'ar' ? 'l' : 'r' }}-1"></i></span> <span class="hidden-xs">{{ __('content.attachments') }}</span> </a>
+											<a href="#attachs" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="las la-images tx-15 m{{ Config::get('app.locale') == 'ar' ? 'l' : 'r' }}-1"></i></span> <span class="hidden-xs">{{ trans_choice('content.attachment',2) }}</span> </a>
 										</li>
 										<li>
 											<a href="#settings" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="las la-cog tx-16 m{{ Config::get('app.locale') == 'ar' ? 'l' : 'r' }}-1"></i></span> <span class="hidden-xs">{{ __('content.settings') }}</span> </a>
@@ -172,7 +174,9 @@
 																<a class="image-popup btn-sm btn btn-success-gradient btn-block" href="{{ route('download.file',['attachs',$attach->name]) }}">{{ __('content.downloadFile') }}</a>
 															</div>
 															<div class="col-md-12 mg-t-5">
-																<a class="image-popup btn-sm btn btn-danger-gradient btn-block" href="{{ route('delete.file',[$subcontractor->id,$attach->name]) }}">{{ __('content.delete') }}</a>
+																<a class="image-popup btn-sm btn btn-danger-gradient btn-block swal-warning" href="{{ route('delete.file',[$subcontractor->id,$attach->name]) }}" title="{{ __('content.delete') }}" data-placement="top" data-toggle="tooltip">{{ __('content.delete') }}</a>
+																
+																<a class="d-none" href="{{ route('delete.file',[$subcontractor->id,$attach->name]) }}"></a>
 															</div>
 														
 														</div>
@@ -385,6 +389,8 @@
 <!--Internal  Notify js -->
 <script src="{{URL::asset('assets/dashboard/assets/plugins/notify/js/notifIt.js')}}"></script>
 <script src="{{URL::asset('assets/dashboard/assets/plugins/notify/js/notifit-custom.js')}}"></script>
+<!--Internal  Sweet-Alert js-->
+<script src="{{URL::asset('assets/dashboard/assets/plugins/sweet-alert/sweetalert.min.js')}}"></script>
 @if (session('success'))
 	<script>
 		function not7() {
@@ -426,6 +432,36 @@
 				return (className.match(/(^|\s)effect-\S+/g) || []).join(' ');
 			});
 		});
+	});
+
+	$('a.swal-warning').each(function(){
+		$(this).on('click',function(e){
+			e.preventDefault();
+			var current_object = $(this),
+				title = current_object.attr("data-original-title");
+				text = "";
+				type = "";
+
+				if(title == "{{ __('content.delete') }}"){
+					text = "{{ __('content.delete forever') }}";
+					type = "error";
+				}
+			swal({
+				title: "{{ __('content.are you sure?') }}",
+				text: text,
+				type: type,
+				showCancelButton: true,
+				cancelButtonText: "{{ __('content.cancel') }}",
+				confirmButtonText: "{{ __('content.Yes') }}",
+				confirmButtonColor: '#57a94f',
+				
+			},
+			function(isConfirm) {
+				if (isConfirm) {
+					current_object.next('.d-none')[0].click();
+				}
+			});
+		})
 	});
 </script>
 @endsection

@@ -116,7 +116,12 @@
 														@if (isset(request()->search) != null) 
 														{!! __('content.sorry no results found for', ['search'=> "<b>".request()->search."</b>."]) !!} 
 														@else
-															{{ __('content.no items yet',['model'=>trans_choice('content.work site',2)]) }} <a href="{{ route('worksites.create') }}">{{  __('content.create now') }}</a>
+															@isset ($subcontractorWorksites)
+																{{ trans_choice('content.subcontractor',1) }} <a href="{{ route('subcontractors.show',$subcontractor->id) }}">{{ $subcontractor->name }}</a> - {{ __('content.no items yet',['model'=> removeLettersFromStart(trans_choice('content.work site',2), 0 ,5)]) }}
+															@else
+																{{ __('content.no items yet',['model'=>trans_choice('content.work site',2)]) }} 
+															@endisset
+															<a href="{{ route('worksites.create') }}">{{  __('content.create now') }}</a>
 														@endif
 													</th>
 												</tr>

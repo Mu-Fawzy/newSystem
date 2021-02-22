@@ -119,7 +119,7 @@
 									</div>
 									<div class="col-lg-8">
 										<div class="form-group">
-											<label class="form-label">{{ __('content.attachments') }}</label>
+											<label class="form-label">{{ trans_choice('content.attachment',2) }}</label>
 											<input type="file" name="attachment_name[]" class="dropify" data-height="200" multiple/>
 										</div>
 									</div>

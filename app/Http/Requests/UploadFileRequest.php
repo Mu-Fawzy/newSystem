@@ -46,10 +46,10 @@ class UploadFileRequest extends FormRequest
     public function translateMessage(){
         $arrayMessage = array();
 
-        $arrayMessage['attachment_name.array'] = __('validation.array',['attribute'=>__('content.attachments')]);
-        $arrayMessage['attachment_name.*.required'] = __('validation.required',['attribute'=>__('content.attachments')]);
-        $arrayMessage['attachment_name.*.mimes'] = __('validation.mimes',['attribute'=>__('content.attachments')]);
-        $arrayMessage['attachment_name.*.max'] = __('validation.max',['attribute'=>__('content.attachments')]);
+        $arrayMessage['attachment_name.array'] = __('validation.array',['attribute'=>trans_choice('content.attachment',2)]);
+        $arrayMessage['attachment_name.*.required'] = __('validation.required',['attribute'=>trans_choice('content.attachment',2)]);
+        $arrayMessage['attachment_name.*.mimes'] = __('validation.mimes',['attribute'=>trans_choice('content.attachment',2)]);
+        $arrayMessage['attachment_name.*.max'] = __('validation.max',['attribute'=>trans_choice('content.attachment',2)]);
         $arrayMessage['logo.image'] = __('validation.image',['attribute'=>__('content.subcontractor logo')]);
         $arrayMessage['logo.mimes'] = __('validation.mimes',['attribute'=>__('content.subcontractor logo')]);
         $arrayMessage['logo.max'] = __('validation.max',['attribute'=>__('content.subcontractor logo')]);
