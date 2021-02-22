@@ -59,7 +59,7 @@ class WorkitemsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(WorkitemRequest $request)
+    public function store(Request $request)
     {
         return $request;
         $data = array();
