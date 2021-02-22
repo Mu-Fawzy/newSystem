@@ -59,8 +59,9 @@ class WorkitemsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(WorkitemRequest $request)
+    public function store(Request $request)
     {
+        return $request;
         $data = array();
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name.".$localeCode];
@@ -96,9 +97,8 @@ class WorkitemsController extends Controller
      * @param  \App\Models\Workitem  $workitems
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Workitem $workitem)
+    public function update(WorkitemRequest $request, Workitem $workitem)
     {
-        return $request;
         $data = [];
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name.".$localeCode];
