@@ -48,7 +48,7 @@ class WorkitemRequest extends FormRequest
     public function translateRequest(){
         $arrayRequest = array();
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
-            $arrayRequest['name.'.$localeCode] = 'required|string|unique:workitems,name->'.$localeCode;
+            $arrayRequest['name.'.$localeCode] = "required|string|unique:workitems,name->$localeCode";
         }
         return $arrayRequest;
     }
@@ -56,7 +56,7 @@ class WorkitemRequest extends FormRequest
     public function translateRequestunique(){
         $arrayRequestunique = array();
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
-            $arrayRequestunique['name.'.$localeCode] = ['required','string', Rule::unique('workitems', 'name->'.$localeCode)->ignore($this->workitem)];
+            $arrayRequestunique['name.'.$localeCode] = ['required','string', Rule::unique("workitems", "name->$localeCode")->ignore($this->workitem)];
         }
         return $arrayRequestunique;
     }

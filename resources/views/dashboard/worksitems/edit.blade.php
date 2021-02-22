@@ -69,8 +69,8 @@
 										<div class="col-lg-6">
 											<div class="form-group">
 												<label class="form-label">{{__('content.name',['model'=>trans_choice('content.work item',1) ])." ".$localeCode }}</label>
-												<input type="text" class="form-control" name="name_{{ $localeCode }}" placeholder="{{__('content.name',['model'=>trans_choice('content.work item',1) ])." ".$localeCode }}" value="{{ $workitem->getTranslation('name', $localeCode) }}">
-												@error('name_'.$localeCode)
+												<input type="text" class="form-control" name="name[{{ $localeCode }}]" placeholder="{{__('content.name',['model'=>trans_choice('content.work item',1) ])." ".$localeCode }}" value="{{ $workitem->getTranslation('name', $localeCode) }}">
+												@error('name.'.$localeCode)
 													<div class="alert alert-danger mg-t-6" role="alert">
 														<button aria-label="Close" class="close" data-dismiss="alert" type="button">
 															<span aria-hidden="true">&times;</span>

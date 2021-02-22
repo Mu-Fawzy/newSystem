@@ -100,7 +100,7 @@ class WorkitemsController extends Controller
     {
         $data = [];
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
-            $data['name'][$localeCode] = $request["name_".$localeCode];
+            $data['name'][$localeCode] = $request["name.".$localeCode];
         }
 
         $data['user_id'] = auth()->id();
