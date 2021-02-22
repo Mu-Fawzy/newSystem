@@ -39,7 +39,7 @@ class WorkitemsController extends Controller
         ->groupBy('year')
         ->get();
 
-        return view('dashboard\worksitems\workitems', compact('workitems','searchText','years'));
+        return view('dashboard.worksitems.workitems', compact('workitems','searchText','years'));
     }
 
     /**
