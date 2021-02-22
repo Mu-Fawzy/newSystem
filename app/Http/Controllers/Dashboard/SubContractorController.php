@@ -46,7 +46,7 @@ class SubContractorController extends Controller
         ->when($request->search ,function ($query) use ($request) {
             return $query->where('phone','LIKE', '%'.$request->search.'%')
             ->orWhere(function ($q) use ($request) {
-                foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode) {
                     $q->orWhere(function ($qr) use ($request,$localeCode) {
                         return $qr->where("name->$localeCode", 'LIKE', '%'. $request->search . '%')
                                 ->orWhere("address->$localeCode",'LIKE', '%'.$request->search.'%');
@@ -113,7 +113,7 @@ class SubContractorController extends Controller
     public function store(SubcontractorRequest $request)
     {
         $data = [];
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name_".$localeCode];
             $data['address'][$localeCode] = $request["address_".$localeCode];
             $data['bio'][$localeCode] = $request["bio_".$localeCode];
@@ -173,7 +173,7 @@ class SubContractorController extends Controller
     public function update(SubcontractorRequest $request, SubContractor $subcontractor)
     {
         $data = [];
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name_".$localeCode];
             $data['address'][$localeCode] = $request["address_".$localeCode];
             $data['bio'][$localeCode] = $request["bio_".$localeCode];

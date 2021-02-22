@@ -25,7 +25,7 @@ class WorkitemsController extends Controller
         $workitems = Workitem::with('user')
         ->when($request->search, function($q) use($request){
             return $q->where(function ($query) use($request){
-                foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode) {
                     $query->orWhere("name->$localeCode", 'LIKE', '%'.$request->search.'%');
                 }
             });
@@ -59,11 +59,11 @@ class WorkitemsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(WorkitemRequest $request)
     {
         $data = array();
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
-            $data['name'][$localeCode] = $request["name_".$localeCode];
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
+            $data['name'][$localeCode] = $request["name.".$localeCode];
         }
 
         $data['user_id'] = auth()->id();
@@ -99,7 +99,7 @@ class WorkitemsController extends Controller
     public function update(WorkitemRequest $request, Workitem $workitem)
     {
         $data = [];
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name_".$localeCode];
         }
 

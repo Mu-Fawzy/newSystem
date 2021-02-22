@@ -45,7 +45,7 @@ class UserController extends Controller
                 return $query->where('name','like','%'.$request->search.'%')
                 ->orWhere('email','like','%'.$request->search.'%')
                 ->orWhere(function ($qr) use ($request) {
-                    foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                    foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode) {
                         $qr->orWhereHas('roles', function ($qs) use ($request,$localeCode) {
                             return $qs->where("name->$localeCode", 'LIKE', '%'. $request->search . '%');
                         });
@@ -54,7 +54,7 @@ class UserController extends Controller
             })->orderBy('id','DESC')->paginate(10);
         }else {
             $users = User::with('roles')->whereHas('roles', function ($q) {
-                foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode) {
                     return $q->where("name->$localeCode",'NOT LIKE', Lang::get('content.owner',[],$localeCode));
                 }
 
@@ -62,11 +62,11 @@ class UserController extends Controller
                 return $query->where('name','like','%'.$request->search.'%')
                 ->orWhere('email','like','%'.$request->search.'%')
                 ->whereHas('roles', function ($qnr) {
-                    foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                    foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode) {
                         return $qnr->where("name->$localeCode",'NOT LIKE', Lang::get('content.owner',[],$localeCode));
                     }
                 })->orWhere(function ($qr) use ($request) {
-                    foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                    foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode) {
                         $qr->orWhereHas('roles', function ($qs) use ($request,$localeCode) {
                             return $qs->where("name->$localeCode", 'LIKE', '%'. $request->search . '%')
                             ->where("name->$localeCode",'NOT LIKE', Lang::get('content.owner',[],$localeCode));
@@ -91,7 +91,7 @@ class UserController extends Controller
         if ($user->hasRole( __('content.owner') )) {
             $roles = Role::select('id','name')->get();
         }else{
-            foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+            foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode) {
                 $roles = Role::where("name->$localeCode",'NOT LIKE',Lang::get('content.owner',[],$localeCode))->select('id','name')->get();
             }
         }
@@ -145,7 +145,7 @@ class UserController extends Controller
         if ($auth->hasRole( __('content.owner') )) {
             $roles = Role::select('id','name')->get();
         }else{
-            foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+            foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode) {
                 $roles = Role::where("name->$localeCode",'NOT LIKE',Lang::get('content.owner',[],$localeCode))->select('id','name')->get();
             }
         }

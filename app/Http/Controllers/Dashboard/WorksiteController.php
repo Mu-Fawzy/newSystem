@@ -25,7 +25,7 @@ class WorksiteController extends Controller
         $worksites = Worksite::with('user')
         ->when($request->search, function($q) use($request){
             return $q->where(function ($query) use($request){
-                foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode) {
                     $query->orWhere('name->'.$localeCode, 'LIKE', '%'.$request->search.'%')
                     ->orWhere('owner->'.$localeCode, 'LIKE', '%'. $request->search . '%');
                 }
@@ -52,7 +52,7 @@ class WorksiteController extends Controller
     public function store(WorksiteRequest $request)
     {
         $data = [];
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name_".$localeCode];
             $data['owner'][$localeCode] = $request["owner_".$localeCode];
         }
@@ -80,7 +80,7 @@ class WorksiteController extends Controller
     {
 
         $data = [];
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name_".$localeCode];
             $data['owner'][$localeCode] = $request["owner_".$localeCode];
         }

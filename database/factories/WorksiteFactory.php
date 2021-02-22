@@ -38,7 +38,7 @@ class WorksiteFactory extends Factory
 
     public function name(){
         $arrayRequestunique = array();
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             if ($localeCode == 'ar') {
                 $arrayRequestunique[$localeCode] = $this->faker->company;
             }else{
@@ -49,7 +49,7 @@ class WorksiteFactory extends Factory
     }
     public function owner(){
         $arrayRequestunique = array();
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             if ($localeCode == 'ar') {
                 $arrayRequestunique[$localeCode] = $this->faker->name('male');
             }else{

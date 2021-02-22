@@ -48,7 +48,7 @@ class WorksiteRequest extends FormRequest
 
     public function translateRequest(){
         $arrayRequest = array();
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $arrayRequest['name_'.$localeCode] = 'required|string|unique:worksites,name->'.$localeCode;
             $arrayRequest['owner_'.$localeCode] = 'sometimes|string';
         }
@@ -57,7 +57,7 @@ class WorksiteRequest extends FormRequest
 
     public function translateRequestunique(){
         $arrayRequestunique = array();
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $arrayRequestunique['name_'.$localeCode] = ['required','string', Rule::unique('worksites', 'name->'.$localeCode)->ignore($this->worksite)];
             $arrayRequestunique['owner_'.$localeCode] = 'sometimes|string';
         }
@@ -66,7 +66,7 @@ class WorksiteRequest extends FormRequest
 
     public function translateMessage(){
         $arrayMessage = array();
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $arrayMessage['name_'.$localeCode.'.required'] = __('validation.required', ['attribute'=> trans_choice('content.work site',1).' '.$localeCode]);
             $arrayMessage['name_'.$localeCode.'.string'] = __('validation.string', ['attribute'=> trans_choice('content.work site',1).' '.$localeCode]);
             $arrayMessage['name_'.$localeCode.'.unique'] = __('validation.unique', ['attribute'=> trans_choice('content.work site',1).' '.$localeCode]);

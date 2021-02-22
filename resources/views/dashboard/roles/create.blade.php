@@ -57,7 +57,7 @@
 							<form class="form-horizontal" action="{{ route('roles.store') }}" method="POST">
 								@csrf
 								<div class="row row-sm mg-b-20">
-									@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+									@foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode)
 										<div class="col-lg-6">
 											<div class="form-group">
 												<label class="form-label">{{ __('content.name',['model'=>trans_choice('content.role',1)])." ".$localeCode }}</label>

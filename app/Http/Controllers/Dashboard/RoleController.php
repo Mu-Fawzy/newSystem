@@ -33,19 +33,19 @@ class RoleController extends Controller
         if ($user->hasRole( __('content.owner') )) {
             $roles = Role::when($request->search ,function($q) use ($request) {
                 return $q->orWhere(function ($qr) use ($request) {
-                    foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                    foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode) {
                         $qr->orWhere("name->$localeCode", 'LIKE', '%'. $request->search . '%');
                     };
                 });
             })->orderBy('id','DESC')->paginate(10);
         }else {
             $roles = Role::where(function ($qr) use ($request) {
-                foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode) {
                     $qr->where("name->$localeCode",'NOT LIKE', Lang::get('content.owner',[],$localeCode));
                 };
             })->when($request->search ,function ($query) use ($request) {
                 return $query->where(function ($qr) use ($request) {
-                    foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                    foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode) {
                         $qr->orWhere("name->$localeCode", 'LIKE', '%'. $request->search . '%')
                         ->where("name->$localeCode",'NOT LIKE', Lang::get('content.owner',[],$localeCode));
                     };
@@ -77,7 +77,7 @@ class RoleController extends Controller
     public function store(RoleRequest $request)
     {
         $data = [];
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name_".$localeCode];
         }
 
@@ -129,7 +129,7 @@ class RoleController extends Controller
     public function update(RoleRequest $request, Role $role)
     {
         $data = [];
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name_".$localeCode];
         }
 

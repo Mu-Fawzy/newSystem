@@ -28,7 +28,7 @@ class SubcontractorFactory extends Factory
         $datetime = $this->faker->dateTimeBetween('-5 years');
 
         $arrayRequestunique = array();
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             if ($localeCode == 'ar') {
                 $arrayRequestunique['name'][$localeCode] = $arabicfaker->company;
                 $arrayRequestunique['address'][$localeCode] = $arabicfaker->address ;

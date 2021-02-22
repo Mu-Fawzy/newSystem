@@ -48,7 +48,7 @@ class SubcontractorRequest extends FormRequest
 
     public function postRequest(){
         $arrayRequest = array();
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $arrayRequest['name_'.$localeCode] = 'required|string|unique:subcontractors,name->'.$localeCode;
             $arrayRequest['address_'.$localeCode] = 'sometimes';
             $arrayRequest['bio_'.$localeCode] = 'sometimes';
@@ -64,7 +64,7 @@ class SubcontractorRequest extends FormRequest
 
     public function patchRequest(){
         $arrayRequest = array();
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $arrayRequest['name_'.$localeCode] = ['required','string', Rule::unique('subcontractors', 'name->'.$localeCode)->ignore($this->subcontractor)];
             $arrayRequest['address_'.$localeCode] = 'sometimes';
             $arrayRequest['bio_'.$localeCode] = 'sometimes';
@@ -77,7 +77,7 @@ class SubcontractorRequest extends FormRequest
 
     public function translateMessage(){
         $arrayMessage = array();
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $arrayMessage['name_'.$localeCode.'.required'] = __('validation.required', ['attribute'=> __('content.subcontractor name').' '.$localeCode]);
             $arrayMessage['name_'.$localeCode.'.string'] = __('validation.string',['attribute'=> __('content.subcontractor name').' '.$localeCode]);
             $arrayMessage['name_'.$localeCode.'.unique'] = __('validation.unique', ['attribute'=> __('content.subcontractor name').' '.$localeCode]);

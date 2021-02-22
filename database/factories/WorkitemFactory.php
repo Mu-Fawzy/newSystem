@@ -37,7 +37,7 @@ class WorkitemFactory extends Factory
 
     public function loopLangs(){
         $arrayRequestunique = array();
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             if ($localeCode == 'ar') {
                 $arrayRequestunique[$localeCode] = $this->faker->catchPhrase;
             }else{

@@ -44,12 +44,12 @@
 								@csrf
 								<div class="row row-sm mg-b-20">
 									
-									@foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+									@foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode)
 										<div class="col-lg-6">
 											<div class="form-group">
 												<label class="form-label">{{__('content.name',['model'=>trans_choice('content.work item',1) ])." ".$localeCode }}</label>
-												<input type="text" class="form-control" name="name_{{ $localeCode }}" placeholder="{{__('content.name',['model'=>trans_choice('content.work item',1) ])." ".$localeCode }}" value="{{ old('name_'.$localeCode) }}">
-												@error('name_'.$localeCode)
+												<input type="text" class="form-control" name="name[{{$localeCode}}]" placeholder="{{__('content.name',['model'=>trans_choice('content.work item',1) ])." ".$localeCode }}" value="{{ old('name.'.$localeCode) }}">
+												@error('name.'.$localeCode)
 													<div class="alert alert-danger mg-t-6" role="alert">
 														<button aria-label="Close" class="close" data-dismiss="alert" type="button">
 															<span aria-hidden="true">&times;</span>

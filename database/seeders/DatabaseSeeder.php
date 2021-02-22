@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
 
     public function createRole(){
         $arrayrole = array();
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $arrayrole['name'][$localeCode] = Lang::get('content.owner',[],$localeCode);
         }
         return $arrayrole;
@@ -58,7 +58,7 @@ class DatabaseSeeder extends Seeder
 
     public function createPermission($perm){
         $arraypermission = array();
-        foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $arraypermission['name'][$localeCode] = Lang::get('content.'.$perm,[],$localeCode);
         }
         return $arraypermission;

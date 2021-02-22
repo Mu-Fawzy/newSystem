@@ -40,7 +40,7 @@ class ContractController extends Controller
         ->when($request->search, function($q) use($request){
             return $q->where('contract_number', 'LIKE', '%'.$request->search.'%')
             ->orWhere(function ($qr) use ($request) {
-                foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode) {
                     $qr->orWhereHas('subcontactor', function ($qs) use ($request,$localeCode) {
                         return $qs->where("name->$localeCode", 'LIKE', '%'. $request->search .'%');
                     })->orWhereHas('worksite', function ($qwi) use ($request,$localeCode) {
