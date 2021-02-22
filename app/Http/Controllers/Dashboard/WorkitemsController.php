@@ -61,7 +61,8 @@ class WorkitemsController extends Controller
      */
     public function store(WorkitemRequest $request)
     {
-        $data = [];
+        return $request;
+        $data = array();
         foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties){
             $data['name'][$localeCode] = $request["name_".$localeCode];
         }
