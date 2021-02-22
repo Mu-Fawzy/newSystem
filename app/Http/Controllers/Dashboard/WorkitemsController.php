@@ -61,14 +61,13 @@ class WorkitemsController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
         $data = array();
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name.".$localeCode];
         }
 
         $data['user_id'] = auth()->id();
-
+        return $data;
         $workitem = Workitem::create($data);
 
         if($workitem){
