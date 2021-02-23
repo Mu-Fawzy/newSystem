@@ -96,8 +96,11 @@ class WorkitemsController extends Controller
      * @param  \App\Models\Workitem  $workitems
      * @return \Illuminate\Http\Response
      */
-    public function update(WorkitemRequest $request, Workitem $workitem)
+    public function update(Request $request, Workitem $workitem)
     {
+        $this->validate($request,[
+            'name.*' => "required|string|unique_translation:workitems,name,{$workitem->id}",
+        ]);
         $data = [];
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name.".$localeCode];
@@ -106,7 +109,6 @@ class WorkitemsController extends Controller
         $data['user_id'] = auth()->id();
 
         $workitem->update($data);
-
 
         if($workitem){
             $request->session()->flash('success', __('content.updated successfully',['attr'=>$workitem->name,'name'=>trans_choice('content.work item',1)]));
