@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use CodeZero\UniqueTranslation\UniqueTranslationRule;
 
 class WorkitemRequest extends FormRequest
 {
@@ -48,8 +49,7 @@ class WorkitemRequest extends FormRequest
     public function translateRequest(){
         $arrayRequest = array();
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
-            //$arrayRequest['name.'.$localeCode] = "required|string|unique:workitems,name->$localeCode";
-            $arrayRequest['name.'.$localeCode] = ['required','string', Rule::unique("workitems", "name->$localeCode")];
+            $arrayRequest['name.'.$localeCode] = "required|string|unique_translation:workitems";
         }
         return $arrayRequest;
     }
@@ -57,11 +57,10 @@ class WorkitemRequest extends FormRequest
     public function translateRequestunique(){
         $arrayRequestunique = array();
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
-            $arrayRequestunique['name.'.$localeCode] = ['required','string', Rule::unique("workitems", "name->$localeCode")->ignore($this->workitem)];
+            $arrayRequestunique['name.'.$localeCode] = ['required','string', UniqueTranslationRule::for('workitems')->ignore($this->workitem->id)];
         }
         return $arrayRequestunique;
     }
-
 
     public function translateMessage(){
         $arrayMessage = array();
