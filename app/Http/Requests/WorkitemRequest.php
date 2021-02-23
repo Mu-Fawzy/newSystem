@@ -35,28 +35,39 @@ class WorkitemRequest extends FormRequest
             }
             case 'POST':
             {
-                return [
-                    'name.*' => 'required|string|unique_translation:workitems',
-                ];
+                return $this->translateRequest();
             }
             case 'PUT':
             case 'PATCH':
             {
-                return [
-                    'name.*' => "required|string|unique_translation:workitems,name,{$this->workitem->id}",
-                ];
+                return $this->translateRequestunique();
             }
             default:break;
         }
     }
 
+    public function translateRequest(){
+        $arrayRequest = array();
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
+            $arrayRequest['name.'.$localeCode] = 'required|string|unique:workitems,name->'.$localeCode;
+        }
+        return $arrayRequest;
+    }
+
+    public function translateRequestunique(){
+        $arrayRequestunique = array();
+        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
+            $arrayRequestunique['name.'.$localeCode] = ['required','string', Rule::unique('workitems', 'name->'.$localeCode)->ignore($this->worksite)];
+        }
+        return $arrayRequestunique;
+    }
 
     public function translateMessage(){
         $arrayMessage = array();
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $arrayMessage['name.'.$localeCode.'.required'] = __('validation.required', ['attribute'=> trans_choice('content.work item',1).' '.$localeCode]);
             $arrayMessage['name.'.$localeCode.'.string'] = __('validation.string', ['attribute'=> trans_choice('content.work item',1).' '.$localeCode]);
-            $arrayMessage['name.'.$localeCode.'.unique_translation'] = __('validation.unique', ['attribute'=> trans_choice('content.work item',1).' '.$localeCode]);
+            $arrayMessage['name.'.$localeCode.'.unique'] = __('validation.unique', ['attribute'=> trans_choice('content.work item',1).' '.$localeCode]);
         }
         return $arrayMessage;
     }
