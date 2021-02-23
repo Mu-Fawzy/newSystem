@@ -50,6 +50,9 @@ class WorkitemRequest extends FormRequest
         $arrayRequest = array();
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $arrayRequest['name.'.$localeCode] = 'required|string|unique:workitems,name->'.$localeCode;
+            // Rule::exists('countries')->where(function ($query) use ($country) {
+            //     return $query->where(DB::raw('JSON_EXTRACT(`name`, "$.en")'), $country);
+            // })
         }
         return $arrayRequest;
     }
