@@ -49,7 +49,7 @@ class WorkitemRequest extends FormRequest
         $arrayRequest = array();
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             //$arrayRequest['name.'.$localeCode] = "required|string|unique:workitems,name->$localeCode";
-            $arrayRequest['name.'.$localeCode] = "required|string";
+            $arrayRequest['name.'.$localeCode] = ['required','string', Rule::unique("workitems", "name->$localeCode")];
         }
         return $arrayRequest;
     }
