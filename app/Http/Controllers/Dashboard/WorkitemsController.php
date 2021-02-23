@@ -7,6 +7,7 @@ use App\Http\Requests\WorkitemRequest;
 use App\Models\Workitem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class WorkitemsController extends Controller
@@ -61,6 +62,11 @@ class WorkitemsController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name.ar' => 'required|string|unique:workitems,name->ar',
+            'name.en' => 'required|string|unique:workitems,name->en',
+        ]);
+        
         $data = array();
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name.".$localeCode];
