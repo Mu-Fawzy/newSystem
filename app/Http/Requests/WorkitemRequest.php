@@ -35,31 +35,19 @@ class WorkitemRequest extends FormRequest
             }
             case 'POST':
             {
-                return $this->translateRequest();
+                return [
+                    'name.*' => 'required|string|unique_translation:workitems',
+                ];
             }
             case 'PUT':
             case 'PATCH':
             {
-                return $this->translateRequestunique();
+                return [
+                    'name.*' => ['required','string', UniqueTranslationRule::for('workitems')->ignore($this->workitem->id)],
+                ];
             }
             default:break;
         }
-    }
-
-    public function translateRequest(){
-        $arrayRequest = array();
-        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
-            $arrayRequest['name.'.$localeCode] = "required|string|unique_translation:workitems";
-        }
-        return $arrayRequest;
-    }
-
-    public function translateRequestunique(){
-        $arrayRequestunique = array();
-        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
-            $arrayRequestunique['name.'.$localeCode] = ['required','string', UniqueTranslationRule::for('workitems')->ignore($this->workitem->id)];
-        }
-        return $arrayRequestunique;
     }
 
 
