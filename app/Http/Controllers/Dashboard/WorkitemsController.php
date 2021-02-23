@@ -96,11 +96,8 @@ class WorkitemsController extends Controller
      * @param  \App\Models\Workitem  $workitems
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Workitem $workitem)
+    public function update(WorkitemRequest $request, Workitem $workitem)
     {
-        $this->validate($request,[
-            'name.*' => "required|string|unique_translation:workitems,name,{$workitem->id}",
-        ]);
         $data = [];
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name.".$localeCode];
