@@ -67,6 +67,10 @@ class WorkitemsController extends Controller
             'name.en' => 'required|string|unique:workitems,name->en',
         ]);
         
+        if ($validator->fails()) {
+            $request->session()->flash('success', 'eeeee');
+            return redirect()->route('workitems.index');
+        }
         $data = array();
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name.".$localeCode];
