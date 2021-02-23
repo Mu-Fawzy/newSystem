@@ -43,7 +43,7 @@ class WorkitemRequest extends FormRequest
             case 'PATCH':
             {
                 return [
-                    'name.*' => ['required','string', UniqueTranslationRule::for('workitems')->ignore($this->workitem->id)],
+                    'name.*' => "required|string|unique_translation:workitems,name,{$this->workitem->id}",
                 ];
             }
             default:break;
