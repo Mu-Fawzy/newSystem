@@ -62,10 +62,10 @@ class WorkitemsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name.ar' => 'required|string|unique:workitems,name->ar',
-            'name.en' => 'required|string|unique:workitems,name->en',
+            'name.ar' => 'required|json|string|unique:workitems,name->ar',
+            'name.en' => 'required|json|string|unique:workitems,name->en',
         ]);
-        
+
         $data = array();
         foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
             $data['name'][$localeCode] = $request["name.".$localeCode];
