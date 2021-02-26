@@ -8,7 +8,6 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,14 +22,14 @@ class DatabaseSeeder extends Seeder
         $permissions = config('customPermission.permissions');
         foreach ($permissions as $permission) {
             Permission::create([
-                'name' => __('content.'.$permission),
+                'name' => Lang::get('content.'.$permission,[],'ar'),
             ]);
 
         }
 
         //create Role 'Owner' and give all permissions
         $role = Role::create([
-            'name' => 'المالك',
+            'name' => Lang::get('content.owner',[],'ar'), 
         ]);
         $permissions = Permission::pluck('id','id')->all();
         $role->syncPermissions($permissions);
