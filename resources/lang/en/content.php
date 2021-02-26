@@ -45,7 +45,6 @@ return [
     'file'                                  => 'File|Files',
 
     'creator'                               => 'Creator',
-    'owner'                                 => 'Owner',
 
     'prev'                                  => 'Prev',
     'next'                                  => 'Next',

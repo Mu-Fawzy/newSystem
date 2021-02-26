@@ -22,11 +22,16 @@ class DatabaseSeeder extends Seeder
         //create all Permission
         $permissions = config('customPermission.permissions');
         foreach ($permissions as $permission) {
-            Permission::create($this->createPermission($permission));
+            Permission::create([
+                'name' => __('content.'.$permission),
+            ]);
+
         }
 
         //create Role 'Owner' and give all permissions
-        $role = Role::create($this->createRole());
+        $role = Role::create([
+            'name' => 'المالك',
+        ]);
         $permissions = Permission::pluck('id','id')->all();
         $role->syncPermissions($permissions);
 
@@ -46,22 +51,5 @@ class DatabaseSeeder extends Seeder
         // \App\Models\Workitem::factory(120)->create();
         // \App\Models\Subcontractor::factory(25)->create();
         // \App\Models\Contract::factory(1000)->create();
-    }
-
-    public function createRole(){
-        $arrayrole = array();
-        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
-            $arrayrole['name'][$localeCode] = Lang::get('content.owner',[],$localeCode);
-        }
-        return $arrayrole;
-    }
-
-    public function createPermission($perm){
-        $arraypermission = array();
-        foreach(LaravelLocalization::getSupportedLanguagesKeys() as $localeCode){
-            $arraypermission['name'][$localeCode] = Lang::get('content.'.$perm,[],$localeCode);
-        }
-        return $arraypermission;
-    }
-    
+    }    
 }
