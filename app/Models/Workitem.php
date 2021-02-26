@@ -5,16 +5,12 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
 
 class Workitem extends Model
 {
     use HasFactory;
-    use HasTranslations;
 
     protected $fillable = ['name','user_id'];
-
-    public $translatable = ['name'];
 
     //Other Functions
     public function setNameAttribute($value)

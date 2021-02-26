@@ -6,14 +6,12 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Translatable\HasTranslations;
 
 class Subcontractor extends Model
 {
-    use HasFactory, SoftDeletes, HasTranslations;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = ['name','email','phone','address','bio','status','user_id'];
-    public $translatable = ['name','address','bio'];
 
     //Other Functions
     public function setNameAttribute($value)

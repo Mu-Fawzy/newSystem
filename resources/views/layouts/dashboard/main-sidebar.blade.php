@@ -48,7 +48,7 @@
 						@canany([__('content.role-list'),__('content.role-show'), __('content.role-create'), __('content.role-edit'), __('content.role-delete')])
 							<li class="slide">
 								<a class="side-menu__item" href="{{ route('roles.index') }}"><svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"><path d="M0 0h24v24H0V0z" fill="none"></path><path d="M6.26 9L12 13.47 17.74 9 12 4.53z" opacity=".3"></path><path d="M19.37 12.8l-7.38 5.74-7.37-5.73L3 14.07l9 7 9-7zM12 2L3 9l1.63 1.27L12 16l7.36-5.73L21 9l-9-7zm0 11.47L6.26 9 12 4.53 17.74 9 12 13.47z"></path></svg><span class="side-menu__label">{{ __('sidebar.roles list') }}</span><span class="badge badge-success side-badge">
-									{{ \App\Models\Role::where('name','<>', 'Owner')->count() }}
+									{{ \Spatie\Permission\Models\Role::where('name','<>', 'Owner')->count() }}
 								</span></a>
 							</li>
 						@endcanany

@@ -3,9 +3,9 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
-use App\Models\Role;
+use Spatie\Permission\Models\Role;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use App\Models\Permission;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 
